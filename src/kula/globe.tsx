@@ -12,14 +12,19 @@ interface PointWithUserData extends THREE.Object3D {
   };
 }
 
-// Globe z userData
-const globe: THREE.Group & {
+type GlobeGroup = THREE.Group & {
   userData: {
     autoRotate: boolean;
     small: boolean;
     [key: string]: any;
   };
-} = new THREE.Group();
+};
+
+const globe = new THREE.Group() as GlobeGroup;
+
+globe.userData.autoRotate = true;
+globe.userData.small = false;
+
 
 const pointsGroup: PointWithUserData[] = [];
 
