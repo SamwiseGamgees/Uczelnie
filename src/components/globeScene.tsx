@@ -9,7 +9,11 @@ import { initInteractions } from '../kula/interactions';
 import { startAnimationLoop } from '../kula/animation';
 import { addPoints } from '../kula/addingPoints';
 
-const GlobeScene: React.FC = () => {
+interface GlobeSceneProps {
+    className?: string;
+  }
+
+const GlobeScene: React.FC<GlobeSceneProps> = ({ className }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -42,7 +46,7 @@ const GlobeScene: React.FC = () => {
     };
   }, []);
 
-  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
+  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} className={className}/>;
 };
 
 export default GlobeScene;
