@@ -30,11 +30,7 @@ function startAnimationLoop(
     requestAnimationFrame(animate);
 
     // Automatyczny obrót globusa
-    if (globe.userData.autoRotate && globe.userData.small) {
-      globe.rotation.y += 0.01;
-    }
-
-    if (globe.userData.autoRotate && !globe.userData.small) {
+    if (globe.userData.autoRotate) {
       globe.rotateOnAxis(globalYAxis, 0.001);
     }
 

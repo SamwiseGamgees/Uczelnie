@@ -9,7 +9,8 @@ interface GlobeWithUserData extends THREE.Object3D {
     small?: boolean;
     [key: string]: any; // dla dowolnych danych użytkownika
   };
-}
+} 
+let isAnimating = false; //sprawdza czy jest animacja 
 
 function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserData): void {
   const mouse = new THREE.Vector2();
@@ -42,7 +43,9 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
     isDragging = false;
     isTouchingGlobe = false;
     document.body.style.cursor = 'grab';
-    globe.userData.autoRotate = true;
+    if (!isAnimating) {
+      globe.userData.autoRotate = true;
+    }
   });
 
   window.addEventListener('mousemove', (event: MouseEvent) => {
@@ -112,6 +115,7 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
         const intersects = raycaster.intersectObject(globe.children[0], true);
 
         if (intersects.length > 0) {
+          isAnimating = true;
           globe.userData.autoRotate = false;
 
           gsap.to(globe.position, {
@@ -126,6 +130,7 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
             onComplete: () => {
               globe.userData.autoRotate = true;
               globe.userData.small = false;
+              isAnimating = false;
             },
           });
         }
