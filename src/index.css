@@ -5,13 +5,14 @@
 .globe{
     position: fixed;
     z-index: 0;
+    background-color: none;
 }
 .title {
   position: fixed;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%); /* 🔥 magiczne wycentrowanie */
-  z-index: 100;
+  z-index: 10;
   color: white;
   font-size: 5rem;
   font-family: "Inter Tight", sans-serif;

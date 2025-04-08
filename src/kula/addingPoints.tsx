@@ -22,11 +22,6 @@ export async function addPoints(): Promise<PointWithUpdate[]> {
         point.institution
       );
 
-      // Dodaj update, jeśli potrzebny
-      (mesh as PointWithUpdate).update = () => {
-        // np. mesh.rotation.y += 0.01
-      };
-
       points.push(mesh as PointWithUpdate);
     }
 

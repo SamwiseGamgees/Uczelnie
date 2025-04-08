@@ -5,7 +5,7 @@ function App() {
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <GlobeScene className="globe"/>
-      <Title></Title>
+      {/* <Title></Title> */}
     </div>
   );
 }
