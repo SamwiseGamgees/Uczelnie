@@ -117,9 +117,10 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
         if (intersects.length > 0) {
           isAnimating = true;
           globe.userData.autoRotate = false;
-
+          
           gsap.to(globe.position, {
             z: 8,
+            y: 0,
             duration: 2,
             ease: 'power2.out',
           });

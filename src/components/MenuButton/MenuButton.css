@@ -1,0 +1,16 @@
+.menuButton {
+  padding: 10px;
+  font-size: 1rem;
+  margin-left: 10px;
+  background-color: black;
+  color: white;
+  border: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.menuButton:hover{
+    text-decoration: underline;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    cursor: pointer;
+}

@@ -1,13 +1,14 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import './GlobeScene.css'
 
 // importy funkcji z Twoich plików
-import { scene, camera, renderer } from '../kula/sceneSetup';
-import { globe, initGlobe, loadCountries, pointsGroup } from '../kula/globe';
-import { initTouchEvents } from '../kula/touchEvents';
-import { initInteractions } from '../kula/interactions';
-import { startAnimationLoop } from '../kula/animation';
-import { addPoints } from '../kula/addingPoints';
+import { scene, camera, renderer } from '../../kula/sceneSetup';
+import { globe, initGlobe, loadCountries, pointsGroup } from '../../kula/globe';
+import { initTouchEvents } from '../../kula/touchEvents';
+import { initInteractions } from '../../kula/interactions';
+import { startAnimationLoop } from '../../kula/animation';
+import { addPoints } from '../../kula/addingPoints';
 
 interface GlobeSceneProps {
     className?: string;
@@ -30,7 +31,7 @@ const GlobeScene: React.FC<GlobeSceneProps> = ({ className }) => {
 
       // dodaj globusa do sceny
       scene.add(globe);
-
+      globe.position.set(0, 3, 0);
       // interakcje i animacja
       initInteractions(camera, globe);
       startAnimationLoop(scene, camera, renderer, globe, points);

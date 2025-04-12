@@ -1,0 +1,30 @@
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  z-index: 10;
+  color: white;
+  font-size: 15rem;
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  margin: 0;
+}
+
+/* animacje */
+.title{
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid;
+  animation:
+    blink 0.75s step-end infinite;
+}
+
+
+/* Blinking cursor */
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
