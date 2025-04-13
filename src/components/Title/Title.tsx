@@ -24,8 +24,8 @@ export default function Title({ text, speed = 250 }: TitleProps) {
   }, [text]);
 
   return (
-    <h1 className="title">
+    <p className="title">
       {displayed}
-    </h1>
+    </p>
   );
 }

@@ -2,6 +2,7 @@ import GlobeScene from "./components/GlobeScene/GlobeScene";
 import Title from "./components/Title/Title";
 import MenuButton from "./components/MenuButton/MenuButton";
 import UniDesc from "./components/UniDesc/UniDesc";
+import DrawTitle from "./components/Napis/napis";
 
 function App() {
   return (
@@ -12,9 +13,14 @@ function App() {
           <MenuButton>HOME</MenuButton>
           <MenuButton>GLOBE</MenuButton>
         </div>
+        <div className="intro">
+          <DrawTitle />
+          <div className="authors">
+            <Title text="byy Samuel and Jan"></Title>
+          </div>
+        </div>
       </div>
-      <UniDesc uniname='Harvard'></UniDesc>
-      {/* <Title text="Ucczelnie" /> */}
+      <UniDesc></UniDesc>
     </>
   );
 }
