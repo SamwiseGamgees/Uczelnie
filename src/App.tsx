@@ -1,6 +1,7 @@
 import GlobeScene from "./components/GlobeScene/GlobeScene";
 import Title from "./components/Title/Title";
 import MenuButton from "./components/MenuButton/MenuButton";
+import UniDesc from "./components/UniDesc/UniDesc";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
           <MenuButton>GLOBE</MenuButton>
         </div>
       </div>
-      <Title text="Ucczelnie" />
+      <UniDesc uniname='Harvard'></UniDesc>
+      {/* <Title text="Ucczelnie" /> */}
     </>
   );
 }

@@ -31,7 +31,7 @@ function startAnimationLoop(
 
     // Automatyczny obrót globusa
     if (globe.userData.autoRotate) {
-      globe.rotateOnAxis(globalYAxis, 0.001);
+      globe.rotateOnAxis(globalYAxis, 0.0005);
     }
 
     // Aktualizacja pozycji punktów (np. zwróconych przez addPoints)

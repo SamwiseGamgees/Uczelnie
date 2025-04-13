@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { pointsGroup } from './globe';
+import { useHoverStore } from '../zustand/useHoverStore';
 
 // Typowanie dla obiektu globusa z userData
 interface GlobeWithUserData extends THREE.Object3D {
@@ -11,6 +12,12 @@ interface GlobeWithUserData extends THREE.Object3D {
   };
 } 
 let isAnimating = false; //sprawdza czy jest animacja 
+
+// do przesylu informacji o punkcie
+function handlePointHover(name: string | null){
+  const setHoveredName = useHoverStore.getState().setHoveredName;
+  setHoveredName(name);
+};
 
 function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserData): void {
   const mouse = new THREE.Vector2();
@@ -47,6 +54,10 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
       globe.userData.autoRotate = true;
     }
   });
+
+
+
+
 
   window.addEventListener('mousemove', (event: MouseEvent) => {
     if (isDragging && isTouchingGlobe && lastEvent && !globe.userData.small) {
@@ -85,8 +96,13 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
       if (touchingPoints.length > 0) {
         const point = touchingPoints[0].object.parent;
         if (point?.userData?.desc) {
-          console.log(point.userData.desc);
+          document.body.style.cursor = 'pointer';
+          const name = point.userData.desc;
+          handlePointHover(name);
         }
+      }
+      else {
+        handlePointHover(null);
       }
     }
   });

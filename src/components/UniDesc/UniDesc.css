@@ -1,0 +1,18 @@
+.UniDescBox {
+    position: fixed;
+    transform: translate(-50%, -100%);
+    pointer-events: none;
+    z-index: 1000;
+  
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 1px solid white;
+    padding: 12px 20px;
+    border-radius: 12px;
+  
+    font-family: 'Cormorant Garamond', serif;
+    color: white;
+    text-align: center;
+  
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  }

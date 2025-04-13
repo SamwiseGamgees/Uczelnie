@@ -1,6 +1,6 @@
-import * as THREE from 'three';
-import { SVGLoader, SVGResult } from 'three/examples/jsm/loaders/SVGLoader';
-import { camera } from '../src/kula/sceneSetup';
+import * as THREE from "three";
+import { SVGLoader, SVGResult } from "three/examples/jsm/loaders/SVGLoader";
+import { camera } from "../src/kula/sceneSetup";
 
 // Typ dla obiektu punktu z metodą update i flagą isPoint
 interface PointGroup extends THREE.Group {
@@ -18,7 +18,11 @@ interface PointGroup extends THREE.Group {
  * @param radius Promień sfery (domyślnie 1)
  * @returns Obietnica zwracająca grupę 3D z punktem
  */
-function addPointOnSphere(lat: number, lon: number, radius: number = 1): Promise<PointGroup> {
+function addPointOnSphere(
+  lat: number,
+  lon: number,
+  radius: number = 1
+): Promise<PointGroup> {
   return new Promise((resolve, reject) => {
     const latitude = THREE.MathUtils.degToRad(lat);
     const longitude = THREE.MathUtils.degToRad(lon);
@@ -29,9 +33,10 @@ function addPointOnSphere(lat: number, lon: number, radius: number = 1): Promise
 
     const loader = new SVGLoader();
     loader.load(
-      'https://cdn.prod.website-files.com/674b90dd8dfb734293c8e163/674b914ce6116045f09cdf66_Touchpoint.svg',
+      "https://cdn.prod.website-files.com/674b90dd8dfb734293c8e163/674b914ce6116045f09cdf66_Touchpoint.svg",
       (data: SVGResult) => {
         const paths = data.paths;
+        console.log(data.paths);
         const group: PointGroup = new THREE.Group() as PointGroup;
 
         paths.forEach((path) => {
@@ -45,12 +50,16 @@ function addPointOnSphere(lat: number, lon: number, radius: number = 1): Promise
           shapes.forEach((shape) => {
             const geometry = new THREE.ShapeGeometry(shape);
             const mesh = new THREE.Mesh(geometry, material);
-            group.add(mesh);
+            // group.add(mesh);
           });
         });
+        const geometryAux = new THREE.SphereGeometry(0.02, 16, 16); // radius, widthSegments, heightSegments
+        const materialAux = new THREE.MeshBasicMaterial({ color: 0xffffff }); // white
 
+        const dot = new THREE.Mesh(geometryAux, materialAux);
+        group.add(dot);
         group.position.set(x, y, z);
-        group.scale.set(0.0015, 0.0015, 0.0015);
+        group.scale.set(2, 2, 2);
 
         group.userData.isPoint = true;
         group.userData.update = () => {
