@@ -1,0 +1,9 @@
+.menu{
+    left: 50%;
+    transform: translate(-50%);
+    top: 6%;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    z-index: 20;
+  }

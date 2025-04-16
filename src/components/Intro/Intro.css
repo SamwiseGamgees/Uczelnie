@@ -1,0 +1,14 @@
+.intro{
+    position: fixed;
+    align-items: center;
+    top: 50vh;
+    width: 100%;
+    left: 40%;
+    
+  }
+  
+  .authors{
+    display: flex;
+    margin-left: 5%;
+  }
+  

@@ -1,5 +1,5 @@
 // components/Header.tsx
-import './Title.css';
+import './Authors.css';
 
 import { useEffect, useState } from 'react';
 

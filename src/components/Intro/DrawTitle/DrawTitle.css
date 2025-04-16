@@ -1,6 +1,6 @@
 .text{
     stroke: white;
-    stroke-width: 3px;
+    stroke-width: 2px;
     stroke-dasharray: 1800;
     animation: effectText 5s ease-in-out infinite alternate;
     transform: scale(190%);
