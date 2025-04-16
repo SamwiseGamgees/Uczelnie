@@ -36,7 +36,6 @@ function addPointOnSphere(
       "https://cdn.prod.website-files.com/674b90dd8dfb734293c8e163/674b914ce6116045f09cdf66_Touchpoint.svg",
       (data: SVGResult) => {
         const paths = data.paths;
-        console.log(data.paths);
         const group: PointGroup = new THREE.Group() as PointGroup;
 
         paths.forEach((path) => {

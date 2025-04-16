@@ -6,7 +6,7 @@ export default function Intro() {
   return (
     <div className="intro">
       <DrawTitle />
-      <div className="authors">
+      <div className="authorsBox">
         <Title text="byy Samuel and Jan"></Title>
       </div>
     </div>

@@ -6,13 +6,12 @@ import { manageButtonState } from "../../zustand/manageButtonState";
 export default function Menu() {
   const [buttonClicked, setButtonClicked] = useState('home');
   const setButton = manageButtonState(state => state.setButtonClicked);
-  const button = manageButtonState(state => state.buttonClicked);
   return (
     <div className="menu">
-      <MenuButton onClick={() => {setButton('home'); console.log(button)}}>HOME</MenuButton>
-      <MenuButton onClick={() => {setButton('globe'); console.log(button)}}>GLOBE</MenuButton>
+      <MenuButton onClick={() => setButton('home')}>HOME</MenuButton>
+      <MenuButton onClick={() => setButton('globe')}>GLOBE</MenuButton>
       <MenuButton> | </MenuButton>
-      <MenuButton onClick={() => {setButton('log_in'); console.log(button)}}>LOG IN</MenuButton>
+      <MenuButton onClick={() => setButton('log_in')}>LOG IN</MenuButton>
     </div>
   );
 }

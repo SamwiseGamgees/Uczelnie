@@ -27,7 +27,6 @@ const GlobeScene: React.FC<GlobeSceneProps> = ({ className }) => {
 
     // ładowanie punktów
     addPoints().then(points => {
-      console.log('Załadowane punkty:', points);
 
       // dodaj globusa do sceny
       scene.add(globe);

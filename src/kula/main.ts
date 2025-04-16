@@ -16,7 +16,6 @@ async function init() {
     initInteractions(camera, globe);
     startAnimationLoop(scene, camera, renderer, globe, points);
   
-    console.log(pointsGroup);
   }
   
   init(); // <- uruchom funkcję

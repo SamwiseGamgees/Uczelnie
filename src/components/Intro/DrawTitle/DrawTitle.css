@@ -1,11 +1,17 @@
-.text{
-    stroke: white;
-    stroke-width: 2px;
-    stroke-dasharray: 1800;
-    animation: effectText 5s ease-in-out infinite alternate;
-    transform: scale(190%);
-  }
-  @keyframes effectText{
+.text {
+  stroke: white;
+  stroke-width: 2px;
+  stroke-dasharray: 1800;
+  stroke-dashoffset: 1800;
+  animation: showText 5s forwards ease-in-out;
+  transform: scale(190%); /* poprawne – 190% nie działa */
+}
+
+.text.hide {
+  animation: hideText 2s forwards !important;
+}
+
+@keyframes showText{
     from{
       stroke-dashoffset: 1800;
     } to{
@@ -13,3 +19,10 @@
     }
   }
   
+@keyframes hideText {
+  from{
+    stroke-dashoffset: 1000;
+  } to{
+    stroke-dashoffset: 1800;
+  }
+}
