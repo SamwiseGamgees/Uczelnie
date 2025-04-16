@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
 import './GlobeScene.css'
 
 // importy funkcji z Twoich plików

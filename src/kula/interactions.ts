@@ -1,7 +1,8 @@
-import * as THREE from 'three';
-import { gsap } from 'gsap';
-import { pointsGroup } from './globe';
-import { useHoverStore } from '../zustand/useHoverStore';
+import * as THREE from "three";
+import { gsap } from "gsap";
+import { pointsGroup } from "./globe";
+import { useHoverStore } from "../zustand/useHoverStore";
+import { manageButtonState } from "../zustand/manageButtonState";
 
 // Typowanie dla obiektu globusa z userData
 interface GlobeWithUserData extends THREE.Object3D {
@@ -10,16 +11,19 @@ interface GlobeWithUserData extends THREE.Object3D {
     small?: boolean;
     [key: string]: any; // dla dowolnych danych użytkownika
   };
-} 
-let isAnimating = false; //sprawdza czy jest animacja 
+}
+let isAnimating = false; //sprawdza czy jest animacja
 
 // do przesylu informacji o punkcie
-function handlePointHover(name: string | null){
+function handlePointHover(name: string | null) {
   const setHoveredName = useHoverStore.getState().setHoveredName;
   setHoveredName(name);
-};
+}
 
-function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserData): void {
+function initInteractions(
+  camera: THREE.PerspectiveCamera,
+  globe: GlobeWithUserData
+): void {
   const mouse = new THREE.Vector2();
   const raycaster = new THREE.Raycaster();
 
@@ -32,7 +36,7 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
   let lastEvent: MouseEvent | null = null;
   let isTouchingGlobe = false;
 
-  window.addEventListener('mousedown', (event: MouseEvent) => {
+  window.addEventListener("mousedown", (event: MouseEvent) => {
     isDragging = true;
     lastEvent = event;
     const mousePos = convertMouse(event);
@@ -42,24 +46,20 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
     const intersects = raycaster.intersectObject(globe.children[0], true);
     if (intersects.length > 0) {
       isTouchingGlobe = true;
-      document.body.style.cursor = 'grabbing';
+      document.body.style.cursor = "grabbing";
     }
   });
 
-  window.addEventListener('mouseup', () => {
+  window.addEventListener("mouseup", () => {
     isDragging = false;
     isTouchingGlobe = false;
-    document.body.style.cursor = 'grab';
+    document.body.style.cursor = "grab";
     if (!isAnimating) {
       globe.userData.autoRotate = true;
     }
   });
 
-
-
-
-
-  window.addEventListener('mousemove', (event: MouseEvent) => {
+  window.addEventListener("mousemove", (event: MouseEvent) => {
     if (isDragging && isTouchingGlobe && lastEvent && !globe.userData.small) {
       globe.userData.autoRotate = false;
 
@@ -90,31 +90,31 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
       raycaster.setFromCamera(mouse, camera);
 
       const intersects = raycaster.intersectObject(globe.children[0], true);
-      document.body.style.cursor = intersects.length > 0 ? (isDragging ? 'grabbing' : 'grab') : 'default';
+      document.body.style.cursor =
+        intersects.length > 0 ? (isDragging ? "grabbing" : "grab") : "default";
 
       const touchingPoints = raycaster.intersectObjects(pointsGroup, true);
       if (touchingPoints.length > 0) {
         const point = touchingPoints[0].object.parent;
         if (point?.userData?.desc) {
-          document.body.style.cursor = 'pointer';
+          document.body.style.cursor = "pointer";
           const name = point.userData.desc;
           handlePointHover(name);
         }
-      }
-      else {
+      } else {
         handlePointHover(null);
       }
     }
   });
 
-  window.addEventListener('wheel', (event: WheelEvent) => {
+  window.addEventListener("wheel", (event: WheelEvent) => {
     if (!globe.userData.small) {
       const newZ = globe.position.z + (event.deltaY < 0 ? 0.1 : -0.1);
       if (newZ >= 7.5 && newZ <= 8.5) {
         gsap.to(globe.position, {
           z: newZ,
           duration: 0.2,
-          ease: 'power2.out',
+          ease: "power2.out",
         });
       }
     }
@@ -122,7 +122,7 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
 
   if (globe.userData.autoRotate) {
     window.addEventListener(
-      'mousedown',
+      "mousedown",
       (event: MouseEvent) => {
         const mousePos = convertMouse(event);
         mouse.set(mousePos.x, mousePos.y);
@@ -130,31 +130,62 @@ function initInteractions(camera: THREE.PerspectiveCamera, globe: GlobeWithUserD
 
         const intersects = raycaster.intersectObject(globe.children[0], true);
 
-        if (intersects.length > 0) {
-          isAnimating = true;
-          globe.userData.autoRotate = false;
-          
-          gsap.to(globe.position, {
-            z: 8,
-            y: 0,
-            duration: 2,
-            ease: 'power2.out',
-          });
-
-          gsap.to(globe.rotation, {
-            duration: 2,
-            y: Math.PI * 2,
-            onComplete: () => {
-              globe.userData.autoRotate = true;
-              globe.userData.small = false;
-              isAnimating = false;
-            },
-          });
+        if (intersects.length > 0 && globe.userData.small) {
+          manageButtonState.getState().setButtonClicked('globe');
         }
-      },
-      { once: true }
+      }
     );
   }
+  manageButtonState.subscribe((state) => {
+    if (state.buttonClicked === "globe" && globe.userData.autoRotate) {
+      setTimeout(() => {
+        isAnimating = true;
+        globe.userData.autoRotate = false;
+
+        gsap.to(globe.position, {
+          z: 8,
+          y: 0,
+          duration: 2,
+          ease: "power2.out",
+        });
+
+        gsap.to(globe.rotation, {
+          duration: 2,
+          y: Math.PI * 2,
+          onComplete: () => {
+            globe.userData.autoRotate = true;
+            globe.userData.small = false;
+            isAnimating = false;
+          },
+        });
+      }, 1500);
+    } else if (state.buttonClicked === "home" && !globe.userData.small) {
+      isAnimating = true;
+      globe.userData.autoRotate = false;
+
+      gsap.to(globe.position, {
+        z: 0,
+        y: 3,
+        duration: 2,
+        ease: "power2.out",
+      });
+      gsap.to(globe.rotation, {
+        x: 0,
+        z: 0,
+        duration: 2,
+        ease: "power2.out",
+      })
+      gsap.to(globe.rotation, {
+        duration: 2,
+        y: Math.PI * 2,
+        onComplete: () => {
+          globe.userData.autoRotate = true;
+          globe.userData.small = true;
+          isAnimating = false;
+        },
+      });
+    }
+  });
 }
 
 export { initInteractions };
