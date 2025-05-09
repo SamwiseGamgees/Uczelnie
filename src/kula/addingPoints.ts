@@ -5,7 +5,7 @@ import { PointWithUpdate } from '../types/points'; // jeśli masz gdzieś typ
 interface PointData {
   latitude: number;
   longitude: number;
-  institution: string;
+  University: string;
 }
 
 export async function addPoints(): Promise<PointWithUpdate[]> {
@@ -22,7 +22,7 @@ export async function addPoints(): Promise<PointWithUpdate[]> {
       const mesh = await addGlobePoint(
         point.latitude,
         -point.longitude,
-        point.institution
+        point.University
       );
 
       points.push(mesh as PointWithUpdate);

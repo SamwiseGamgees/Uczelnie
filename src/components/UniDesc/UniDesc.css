@@ -1,18 +1,123 @@
-.UniDescBox {
-    position: fixed;
-    transform: translate(-50%, -100%);
-    pointer-events: none;
-    z-index: 1000;
+/* Tooltip container */
+.tooltip {
+  position: fixed;
+  margin-left: 8px;
+  margin-top: 12px;
+  transform: translate(-50%, -50%);
+  padding: 1px 50px;
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: forwards showBox 1s;
+}
+
+.tooltip h1{
+  margin: 0;
+  background-color: rgba(0, 0, 0, 80%);
+}
+/* Hint container */
+.item-hints .hint {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Rotated square inside hint */
+.item-hints .hint::before {
+  background-color: #fff;
+  width: 8px;
+  height: 8px;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+/* Hint content */
+.item-hints .hint-content {
   
-    background-color: rgba(0, 0, 0, 0.85);
-    border: 1px solid white;
-    padding: 12px 20px;
-    border-radius: 12px;
-  
-    font-family: 'Cormorant Garamond', serif;
-    color: white;
-    text-align: center;
-  
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  color: #fff;
+  position: absolute;
+  padding: 12px;
+  opacity: 0;
+  animation: content-showup 1s ease forwards;
+}
+
+
+@keyframes content-showup {
+  from{
+    opacity: 0;
+    visibility: hidden;
   }
+  to{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+
+/* Hint content animations */
+.item-hints .hint-content::before {
+  width: 0px;
+  bottom: 0;
+  left: 0;
+  content: "";
+  background-color: #fff;
+  height: 2px;
+  position: absolute;
+  transition: width 0.4s;
+  animation: content_before-showup 0.8s ease forwards;
+}
+
+@keyframes content_before-showup {
+  from{
+    width: 0px;
+  }
+  to{
+    width: 100%;
+  }
+}
+
+
+
+.item-hints .hint-content::after {
+  transform-origin: 0 50%;
+  transform: rotate(-225deg);
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  content: "";
+  background-color: #fff;
+  height: 2px;
+  position: absolute;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+@keyframes content_after-showup {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+
+/* Positioning for specific hints */
+.item-hints .hint[data-position="4"] .hint-content {
+  bottom: 85px;
+  left: 50%;
+  margin-left: 56px;
+}

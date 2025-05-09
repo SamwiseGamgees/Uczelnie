@@ -10,7 +10,7 @@ app.use(cors({
 const port = 3000;
 
 const pool = new Pool({
-    connectionString: 'postgresql://root:hANvvIlWXvYsmKJMlUL9HLf6vTKXspMS@dpg-cv7j0jdds78s73ca846g-a.oregon-postgres.render.com/uczelnie',
+    connectionString: 'postgresql://postgres:PROJEKT123@db.ylbyuvzaoaruwstbgpjd.supabase.co:5432/postgres',
     ssl: { rejectUnauthorized: false }
 });
 

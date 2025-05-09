@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { pointsGroup } from './globe';
+
 
 // Typowanie dla obiektów z userData
 interface GlobeWithUserData extends THREE.Object3D {
@@ -30,8 +32,11 @@ function startAnimationLoop(
     requestAnimationFrame(animate);
 
     // Automatyczny obrót globusa
-    if (globe.userData.autoRotate) {
+    if (globe.userData.autoRotate && globe.userData.small) {
       globe.rotateOnAxis(globalYAxis, 0.0005);
+    }
+    else if(globe.userData.autoRotate && !globe.userData.small){
+      globe.rotateOnAxis(globalYAxis, 0.0001);
     }
 
     // Aktualizacja pozycji punktów (np. zwróconych przez addPoints)
@@ -44,7 +49,13 @@ function startAnimationLoop(
 
     renderer.render(scene, camera);
   }
-
+  //animacja punktow
+  pointsGroup.forEach((point) => {
+    if (point.userData?.isPoint && typeof point.userData.update === "function") {
+      point.userData.update();
+    }
+  });
+  
   animate();
 }
 
