@@ -4,7 +4,10 @@
   stroke-dasharray: 1800;
   stroke-dashoffset: 1800;
   animation: showText 5s forwards ease-in-out;
-  transform: scale(190%); /* poprawne – 190% nie działa */
+  width: 100%;
+  height: 15vw;
+  
+
 }
 
 .text.hide {

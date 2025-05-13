@@ -143,7 +143,7 @@ function initInteractions(
         globe.userData.autoRotate = false;
 
         gsap.to(globe.position, {
-          z: 8,
+          z: 7.5,
           y: 0,
           duration: 2,
           ease: "power2.out",

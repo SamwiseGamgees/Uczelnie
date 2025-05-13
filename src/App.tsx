@@ -3,18 +3,35 @@ import Menu from "./components/Menu/Menu";
 import UniDesc from "./components/UniDesc/UniDesc";
 import Frame from "./components/Frame/Frame";
 import Intro from "./components/Intro/Intro";
+import Login from "./components/Login/Login";
+import supabase from "./config/supabaseClient";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ResetPassword from "./components/ResetPassword/ResetPassword"; // ← dodaje tę stronę
+import ForgotPassword from './components/ResetPassword/ForgotPassword';
 
 function App() {
   return (
-    <>
-      <div style={{ width: "100vw", height: "100vh" }}>
-        <GlobeScene className="globe" />
-        <Menu></Menu>
-        <Frame></Frame>
-        <Intro></Intro>
-      </div>
-      <UniDesc></UniDesc>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <div style={{ width: "100vw", height: "100vh" }}>
+                <GlobeScene className="globe" />
+                <Menu />
+                <Frame />
+                <Intro />
+                <Login />
+              </div>
+              <UniDesc />
+            </>
+          }
+        />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

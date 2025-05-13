@@ -1,14 +1,15 @@
 .intro{
     position: fixed;
     align-items: center;
-    top: 50vh;
-    width: 100%;
-    left: 40%;
+    top: 35vh;
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%); 
     
   }
   
   .authorsBox{
     display: flex;
-    margin-left: 5%;
+    justify-content: center;
   }
   
