@@ -1,27 +1,23 @@
-import { useState } from "react";
-import { useEffect } from "react";
 import { useHoverStore } from "../../zustand/useHoverStore";
 import "./UniDesc.css";
 
 export default function UniDesc() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-    const hoveredName = useHoverStore((state: any) => state.hoveredName);
+  const hoveredName = useHoverStore((state) => state.hoveredName);
+  const x = useHoverStore((state) => state.hoveredX);
+  const y = useHoverStore((state) => state.hoveredY);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({
-        x: e.clientX,
-        y: e.clientY,
-      });
-    };
+  if (!hoveredName || x === null || y === null) return null;
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  });
-  if (!hoveredName) return null;
   return (
-    <div className="UniDescBox" style={{ top: position.y, left: position.x }}>
-      <h1>{hoveredName}</h1>
+    <div className="tooltip" style={{ top: y, left: x }}>
+       <div className="item-hints">
+      <div className="hint" data-position="4">
+      <span className="hint-radius"></span>
+      <div className="hint-content do--split-children">
+        <h1>{hoveredName}</h1>
+      </div>
+    </div>
+    </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Menu from "./components/Menu/Menu";
 import UniDesc from "./components/UniDesc/UniDesc";
 import Frame from "./components/Frame/Frame";
 import Intro from "./components/Intro/Intro";
+import UniFrame from "./components/UniFrame/UniFrame";
 import Login from "./components/Login/Login";
 import supabase from "./config/supabaseClient";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -25,6 +26,7 @@ function App() {
                 <Login />
               </div>
               <UniDesc />
+              <UniFrame />
             </>
           }
         />

@@ -179,7 +179,7 @@ export function drawThreeGeo({ json, radius, materalOptions }: DrawOptions): THR
     const geo = new LineGeometry();
     geo.setPositions(verts);
 
-    const color = new THREE.Color('white');
+    const color = new THREE.Color(0xcccccc);
     const mat = new LineMaterial({
       color,
       linewidth: 2,

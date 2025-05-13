@@ -1,10 +1,8 @@
 import MenuButton from "./MenuButton/MenuButton";
 import './Menu.css';
-import { useState } from "react";
 import { manageButtonState } from "../../zustand/manageButtonState";
 
 export default function Menu() {
-  const [buttonClicked, setButtonClicked] = useState('home');
   const setButton = manageButtonState(state => state.setButtonClicked);
   return (
     <div className="menu">

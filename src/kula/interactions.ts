@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { pointsGroup } from "./globe";
 import { useHoverStore } from "../zustand/useHoverStore";
 import { manageButtonState } from "../zustand/manageButtonState";
+import { camera, renderer } from "./sceneSetup";
 
 // Typowanie dla obiektu globusa z userData
 interface GlobeWithUserData extends THREE.Object3D {
@@ -15,10 +16,24 @@ interface GlobeWithUserData extends THREE.Object3D {
 let isAnimating = false; //sprawdza czy jest animacja
 
 // do przesylu informacji o punkcie
-function handlePointHover(name: string | null) {
+function handlePointHover(
+  name: string | null,
+  x: number | null,
+  y: number | null
+) {
   const setHoveredName = useHoverStore.getState().setHoveredName;
-  setHoveredName(name);
+  setHoveredName(name, x, y);
 }
+function handlePointClick(name: string | null) {
+  const setClickedName = useHoverStore.getState().setClickedName;
+  setClickedName(name);
+}
+let clickRequested = false;
+window.addEventListener("click", () => {
+  if(useHoverStore.getState().hoveredName){
+    clickRequested = true;
+  }
+});
 
 function initInteractions(
   camera: THREE.PerspectiveCamera,
@@ -59,6 +74,7 @@ function initInteractions(
     }
   });
 
+  let mousePos: { x: number; y: number } = { x: 0, y: 0 };
   window.addEventListener("mousemove", (event: MouseEvent) => {
     if (isDragging && isTouchingGlobe && lastEvent && !globe.userData.small) {
       globe.userData.autoRotate = false;
@@ -83,9 +99,30 @@ function initInteractions(
 
       lastEvent = event;
     }
+    mousePos = convertMouse(event);
+  });
+  // koordynaty punktu
+  function getScreenCoords(
+    object3D: THREE.Object3D,
+    camera: THREE.Camera,
+    renderer: THREE.WebGLRenderer
+  ) {
+    const vector = new THREE.Vector3();
+    vector.copy(object3D.getWorldPosition(new THREE.Vector3()));
+    vector.project(camera); // przekształcenie do przestrzeni NDC (od -1 do 1)
 
-    if (globe.userData.autoRotate) {
-      const mousePos = convertMouse(event);
+    const widthHalf = renderer.domElement.clientWidth / 2;
+    const heightHalf = renderer.domElement.clientHeight / 2;
+
+    const x = vector.x * widthHalf + widthHalf;
+    const y = -vector.y * heightHalf + heightHalf;
+
+    return { x, y };
+  }
+
+  function pointInteraction() {
+    requestAnimationFrame(pointInteraction);
+    if (!globe.userData.small) {
       mouse.set(mousePos.x, mousePos.y);
       raycaster.setFromCamera(mouse, camera);
 
@@ -99,14 +136,21 @@ function initInteractions(
         if (point?.userData?.desc) {
           document.body.style.cursor = "pointer";
           const name = point.userData.desc;
-          handlePointHover(name);
+          const screenPos = getScreenCoords(point, camera, renderer);
+          handlePointHover(name, screenPos.x, screenPos.y);
+          globe.userData.autoRotate = false;
+          if (clickRequested) {
+            handlePointClick(name);
+            clickRequested = false;
+          }
         }
       } else {
-        handlePointHover(null);
+        handlePointHover(null, null, null);
+        globe.userData.autoRotate = !isDragging;
       }
     }
-  });
-
+  }
+  pointInteraction();
   window.addEventListener("wheel", (event: WheelEvent) => {
     if (!globe.userData.small) {
       const newZ = globe.position.z + (event.deltaY < 0 ? 0.1 : -0.1);
@@ -121,20 +165,17 @@ function initInteractions(
   });
 
   if (globe.userData.autoRotate) {
-    window.addEventListener(
-      "mousedown",
-      (event: MouseEvent) => {
-        const mousePos = convertMouse(event);
-        mouse.set(mousePos.x, mousePos.y);
-        raycaster.setFromCamera(mouse, camera);
+    window.addEventListener("mousedown", (event: MouseEvent) => {
+      const mousePos = convertMouse(event);
+      mouse.set(mousePos.x, mousePos.y);
+      raycaster.setFromCamera(mouse, camera);
 
-        const intersects = raycaster.intersectObject(globe.children[0], true);
+      const intersects = raycaster.intersectObject(globe.children[0], true);
 
-        if (intersects.length > 0 && globe.userData.small) {
-          manageButtonState.getState().setButtonClicked('globe');
-        }
+      if (intersects.length > 0 && globe.userData.small) {
+        manageButtonState.getState().setButtonClicked("globe");
       }
-    );
+    });
   }
   manageButtonState.subscribe((state) => {
     if (state.buttonClicked === "globe" && globe.userData.autoRotate) {
@@ -174,7 +215,7 @@ function initInteractions(
         z: 0,
         duration: 2,
         ease: "power2.out",
-      })
+      });
       gsap.to(globe.rotation, {
         duration: 2,
         y: Math.PI * 2,

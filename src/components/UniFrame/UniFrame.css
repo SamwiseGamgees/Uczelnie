@@ -1,0 +1,153 @@
+/* ----------------------------- */
+/* 1) BAZOWY STAN (schowany) */
+.uniFrameBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  transform-origin: center center;
+
+  /* schowany: */
+  opacity: 0;
+  visibility: hidden;
+  z-index: 3;
+}
+
+/* ----------------------------- */
+/* 2) POKAŻ (tylko pokazujemy animację) */
+.showUniFrameBox {
+  /* włącz widoczność natychmiast, a potem animuj */
+  visibility: visible;
+  animation: uniFrame-showup 0.5s ease-in-out forwards;
+}
+
+@keyframes uniFrame-showup {
+  from {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    /* visibility: visible; – już ustawione w klasie */
+  }
+}
+
+/* ----------------------------- */
+/* 3) SCHOWAJ (tylko gdy użytkownik klika "X") */
+.hideUniFrameBox {
+  animation: uniFrame-hide 0.5s ease-in-out forwards;
+}
+
+@keyframes uniFrame-hide {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ----------------------------- */
+/* 4) Tło blur – analogicznie */
+.blackBackground {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 0;
+
+  /* start – schowane */
+  opacity: 0;
+  visibility: hidden;
+}
+
+.showBlur {
+  visibility: visible;
+  animation: blur-show 0.5s ease-in-out forwards;
+}
+@keyframes blur-show {
+  from {
+    backdrop-filter: blur(0);
+    opacity: 0;
+  }
+  to {
+    backdrop-filter: blur(10px);
+    opacity: 1;
+  }
+}
+
+.hideBlur {
+  animation: blur-hide 0.5s ease-in-out forwards;
+}
+@keyframes blur-hide {
+  from {
+    backdrop-filter: blur(10px);
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    backdrop-filter: blur(0);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+
+.uniFrame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  z-index: 1;
+}
+
+.uniFrameContentBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-52%, -50%);
+  width: 65%;
+  height: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none; /* jeśli chcesz, żeby kliknięcia “przeszły” na SVG */
+  overflow: hidden;
+}
+
+.uniFrameClose {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-color: transparent;
+  border: none;
+  top: 21.5%;
+  left: 81.5%;
+  cursor: pointer;
+
+  /* kluczowe: punkt odniesienia i płynne przejście */
+  transform-origin: center center;
+  transition: transform 0.2s ease;
+}
+
+.uniFrameClose img {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.uniFrameClose:hover {
+  /* skaluj 1.25× względem środka */
+  transform: scale(1.25);
+}
