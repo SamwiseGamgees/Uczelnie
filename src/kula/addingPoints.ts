@@ -13,7 +13,6 @@ export async function addPoints(): Promise<PointWithUpdate[]> {
   const Harvard = addGlobePoint(42.2228, 71.0701, 'Harvard');
   const Nigga = addGlobePoint(32.2228, 51.0701, 'Nigga');
   points.push(Harvard);
-  return points;
   try {
     const response = await fetch('http://127.0.0.1:3000/points');
     const data: PointData[] = await response.json();

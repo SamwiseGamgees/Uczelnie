@@ -2,7 +2,7 @@ import "./UniFrame.css";
 import UniFrameContent from "./UniFrameContent/UniFrameContent";
 import UniFrameImage from "./UniFrameImg";
 import { useHoverStore } from "../../zustand/useHoverStore";
-import xImg from "../../../media/x.png";
+import xImg from "../../media/x.png";
 
 export default function UniFrame() {
   const uniClicked = useHoverStore((state) => state.clickedName);

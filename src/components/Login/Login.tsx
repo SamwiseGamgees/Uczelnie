@@ -27,7 +27,7 @@ export default function Login() {
     });
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [isSignIn, setIsSignIn] = useState(true); // Nowy stan, aby przełączać między Sign In i Log In
+    const [isSignIn, setIsSignIn] = useState(false); // Nowy stan, aby przełączać między Sign In i Log In
     const setUsername = useAuthStore(state => state.setUsername);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -194,7 +194,7 @@ export default function Login() {
                 </form>
 
                 <div className="forgot-password">
-                    {isSignIn && (
+                    {!isSignIn && (
                         <>
                     Forgot Password? <span> </span>
                     <span onClick={() => navigate('/forgot-password')}>

@@ -28,7 +28,7 @@ function addPointOnSphere(
   group.userData.isPoint = true;
 
   // --- główna kropka ---
-  const texture   = new THREE.TextureLoader().load("../media/dot.png");
+  const texture   = new THREE.TextureLoader().load("../src/media/dot.png");
   const planeMat  = new THREE.MeshBasicMaterial({
     map: texture,
     transparent: true,
