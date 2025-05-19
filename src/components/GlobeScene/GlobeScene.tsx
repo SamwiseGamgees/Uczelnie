@@ -20,7 +20,7 @@ const GlobeScene: React.FC<GlobeSceneProps> = ({ className }) => {
     if (!containerRef.current) return;
 
     // inicjalizacja sceny
-    initTouchEvents();
+    // initTouchEvents();
     initGlobe();
     loadCountries();
 
