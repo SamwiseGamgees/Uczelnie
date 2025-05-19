@@ -1,12 +1,12 @@
 import { scene, camera, renderer } from './sceneSetup';
 import { globe, initGlobe, loadCountries, pointsGroup } from './globe';
-import { initTouchEvents } from './touchEvents';
+// import { initTouchEvents } from './touchEvents';
 import { initInteractions } from './interactions';
 import { startAnimationLoop } from './animation';
 import { addPoints } from './addingPoints';
 
 async function init() {
-    initTouchEvents();
+    // initTouchEvents();
     initGlobe();
     loadCountries();
   
