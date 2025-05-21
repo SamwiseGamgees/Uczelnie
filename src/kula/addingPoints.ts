@@ -14,8 +14,8 @@ function delay(ms: number): Promise<void> {
 export async function addPoints(): Promise<PointWithUpdate[]> {
   const points: PointWithUpdate[] = [];
 
-  points.push(addGlobePoint(42.2228, 71.0701, "Harvard"));
-  points.push(addGlobePoint(32.2228, 51.0701, "SomeUniversity")); // renamed
+  // points.push(addGlobePoint(42.2228, 71.0701, "Harvard"));
+  // points.push(addGlobePoint(32.2228, 51.0701, "SomeUniversity")); 
   await delay(4500);
   try {
     const { data, error } = await supabase.from("uczelnie").select("*");

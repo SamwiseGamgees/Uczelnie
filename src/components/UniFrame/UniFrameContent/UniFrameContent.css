@@ -1,3 +1,61 @@
-.uniFrameContent{
-    color: white;
+.uniFrameContent {
+  color: white;
+  animation: forwards appear 0.5s;
+}
+
+@keyframes appear {
+    from{
+        width: 50%;
+    }
+    to{
+        width: 100%;
+    }
+}
+
+.mainInfoBox > div {
+  padding: 0.75rem;
+  padding-top: 3rem;
+  justify-content: center;
+}
+.mainInfoBox h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.mainInfoBox h1 {
+  margin: 0.25rem 0 0;
+  font-weight: 700;
+  line-height: 1.1;
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 350;
+}
+
+.mainInfoBox {
+  display: flex;
+  justify-content: space-around;
+}
+
+.uniNameBox {
+  display: flex;
+  justify-content: center;
+}
+
+.uniNameBox > h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 3rem;
+  margin: 0.25rem 0 0;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.descriptionBox{
+    font-family: "Cormorant Garamond", serif;
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+    height: 45%;
+    display: flex;
+    align-items: center;
 }

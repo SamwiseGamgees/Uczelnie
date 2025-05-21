@@ -11,7 +11,7 @@ export function createGeoGrid(radius: number = 1, stepDeg: number = 10): THREE.O
   const geogrid = new THREE.Group();
 
   const lineMaterial = new THREE.LineBasicMaterial({
-    color: 0xcccccc,
+    color: 0xffffff,
   });
 
   // Równoleżniki
