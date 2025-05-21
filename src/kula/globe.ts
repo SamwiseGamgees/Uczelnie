@@ -42,7 +42,7 @@ function initGlobe(): void {
 }
 
 async function loadCountries(): Promise<void> {
-  const response = await fetch('countries/countries.json');
+  const response = await fetch('/countries/countries.json');
   const data = await response.json();
   const countries = drawThreeGeo({ json: data, radius: 1 });
   globe.add(countries);
