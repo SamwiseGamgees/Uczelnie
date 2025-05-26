@@ -9,6 +9,7 @@ import { useEffect } from "react";
 export default function UniFrame() {
   const uniClicked = useHoverStore((state) => state.clickedName);
   const setClicked = useHoverStore((state) => state.setClickedName);
+  const setIsNew = useHoverStore((state) => state.setIsNew);
   const [seenOnce, setSeenOnce] = useState(false);
   useEffect(() => {
     if (uniClicked != null) {
@@ -40,6 +41,7 @@ export default function UniFrame() {
               className="uniFrameClose"
               onClick={() => {
                 setClicked(null);
+                setIsNew(null);
               }}
               aria-label="Close frame"
             >

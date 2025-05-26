@@ -9,6 +9,8 @@ import supabase from "./config/supabaseClient";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ResetPassword from "./components/ResetPassword/ResetPassword"; // ← dodaje tę stronę
 import ForgotPassword from './components/ResetPassword/ForgotPassword';
+import AddUniPlus from "./components/AddUni/AddUniPlus/AddUniPlus";
+import AddUni from "./components/AddUni/AddUni";
 
 function App() {
   return (
@@ -27,11 +29,13 @@ function App() {
               </div>
               <UniDesc />
               <UniFrame />
+              <AddUniPlus />
             </>
           }
         />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/add-uni" element={<AddUni />} />
       </Routes>
     </BrowserRouter>
   );

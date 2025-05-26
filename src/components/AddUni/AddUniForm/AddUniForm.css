@@ -1,0 +1,153 @@
+/* AddUni.css */
+.addUniFormBox {
+  padding-top: 10vh;
+}
+
+.addUniFormBox > h1 {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 3rem;
+  font-weight: normal;
+  color: #fff;
+  text-align: center;
+  margin: 1.5rem 0 2rem;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.addUniForm {
+  max-width: 400px;
+  margin: 5% auto; /* center on page */
+  margin-top: 0;
+  padding: 2rem;
+  background: #000; /* dark panel */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  color: #fff; /* white labels/text */
+  font-family: "Segoe UI", sans-serif;
+}
+
+.addUniForm .form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.addUniForm label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.addUniForm input,
+.addUniForm textarea {
+  width: 100%;
+  padding: 0.5rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #555;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.addUniForm input:focus,
+.addUniForm textarea:focus {
+  border-bottom-color: #ff5722; /* highlight on focus */
+}
+
+.addUniForm input::placeholder {
+  color: #777;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: #fff;
+  color: #000;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-button:hover {
+  background: #eee;
+}
+
+/* Optional: add icons inside inputs */
+.form-group[data-icon] {
+  padding-left: 2rem;
+}
+
+.form-group[data-icon] input,
+.form-group[data-icon] textarea {
+  padding-left: 2rem;
+}
+
+.form-group[data-icon]::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: 2.1rem;
+  left: 0;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #777;
+  pointer-events: none;
+}
+
+/* Chrome, Edge, Safari */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  /* wypełnij cały input czarnym (albo dowolnym) tłem */
+  box-shadow: 0 0 0px 1000px #000 inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset !important;
+
+  /* tekst białym, żeby było widać na czarnym tle */
+  -webkit-text-fill-color: #fff !important;
+
+  /* wygładzacz, żeby nie migało przy focusie */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Firefox */
+input:-moz-autofill,
+textarea:-moz-autofill {
+  box-shadow: 0 0 0px 1000px #000 inset !important;
+  -moz-text-fill-color: #fff !important;
+}
+
+/* Dodatkowo, gdy użytkownik kliknie i input dostanie focus: */
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus {
+  box-shadow: 0 0 0px 1000px #000 inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset !important;
+}
+/* Chrome, Safari, Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* IE 10+ */
+input[type="number"]::-ms-clear,
+input[type="number"]::-ms-expand {
+  display: none;
+}
+
+.form-group textarea {
+  resize: none;
+  overflow: auto;
+    scrollbar-width: none; 
+}
+
+.addUniForm textarea::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari, Edge */
+}

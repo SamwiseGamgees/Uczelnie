@@ -48,8 +48,8 @@ async function loadCountries(): Promise<void> {
   globe.add(countries);
 }
 
-async function addGlobePoint(lat: number, lon: number, desc: string): Promise<void> {
-  const point: PointWithUserData = await addPointOnSphere(lat, lon);
+async function addGlobePoint(lat: number, lon: number, desc: string, isNew: boolean): Promise<void> {
+  const point: PointWithUserData = addPointOnSphere(lat, lon, 1, isNew);
   globe.add(point);
   point.userData.desc = desc;
   point.userData.type = 'point';

@@ -1,0 +1,15 @@
+.addUniBox {
+  position: fixed;
+  top: 75%;
+  left: 82%;
+  z-index: 1000;
+}
+
+.addUniIcon {
+  display: block; /* avoids any inline-layout quirks */
+  border: 1px solid red;
+}
+
+.addUniIcon:hover{
+    cursor: pointer;
+}
