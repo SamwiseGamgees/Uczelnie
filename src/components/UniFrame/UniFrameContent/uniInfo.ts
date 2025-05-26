@@ -2,6 +2,9 @@
 import supabase from "@/config/supabaseClient";
 import { UniversityInfo } from "@/uniInfoPromise";
 
+interface Opis {
+  description: string;
+}
 export async function getUniversityInfo(
   uniName: string,
   isNew: boolean
@@ -32,7 +35,7 @@ export async function getUniversityInfo(
     ] = await Promise.all([
       supabase
         .from("uczelnie")
-        .select("opisy(description)")
+        .select("opisy(description, world_rank)")
         .eq("University", uniName)
         .single(),
       supabase
@@ -46,14 +49,16 @@ export async function getUniversityInfo(
       console.error("Błąd w zapytaniu uczelni:", descError ?? statError);
       return null;
     }
+    // descData.opisy may be an array if the relation is not .single() or not set up as object
+    // Ensure it's an object or access the first element if it's an array
 
     return {
       kind: "existing",
-      description: (descData.opisy as { description: string }[])?.description,
+      description: (descData?.opisy as unknown as Opis).description ?? null,
       WorldRank: statData.WorldRank,
       NationalRank: statData.NationalRank,
       Score: statData.Score,
       Country: statData.Country,
-    };
+    } as UniversityInfo;
   }
 }

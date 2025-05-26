@@ -32,7 +32,7 @@ function handlePointClick(name: string | null, isNew: boolean) {
 }
 let clickRequested = false;
 window.addEventListener("click", () => {
-  if(useHoverStore.getState().hoveredName){
+  if (useHoverStore.getState().hoveredName) {
     clickRequested = true;
   }
 });
@@ -116,8 +116,9 @@ function initInteractions(
     const widthHalf = renderer.domElement.clientWidth / 2;
     const heightHalf = renderer.domElement.clientHeight / 2;
 
-    const x = vector.x * widthHalf + widthHalf;
-    const y = -vector.y * heightHalf + heightHalf;
+    const rect = renderer.domElement.getBoundingClientRect();
+    const x = vector.x * widthHalf + widthHalf + rect.left;
+    const y = -vector.y * heightHalf + heightHalf + rect.top;
 
     return { x, y };
   }
@@ -181,7 +182,11 @@ function initInteractions(
     });
   }
   manageButtonState.subscribe((state) => {
-    if (state.buttonClicked === "globe" && globe.userData.autoRotate && state.prevButtonClicked !== "globe" ) {
+    if (
+      state.buttonClicked === "globe" &&
+      globe.userData.autoRotate &&
+      state.prevButtonClicked !== "globe"
+    ) {
       setTimeout(() => {
         isAnimating = true;
         globe.userData.autoRotate = false;
