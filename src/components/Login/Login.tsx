@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './Login.css';
 import { manageButtonState } from '../../zustand/manageButtonState';
-import user from '../../media/user.png';
-import envelope from '../../media/envelope.png';
-import password from '../../media/password-lock.png';
-import googleIcon from '../../media/google.png';
+import user from '/media/user.png';
+import envelope from '/media/envelope.png';
+import password from '/media/password-lock.png';
+import googleIcon from '/media/google.png';
 import supabase from "../../config/supabaseClient";
 import { useAuthStore } from '../../zustand/useAuthStore';
 import { useNavigate } from 'react-router-dom';

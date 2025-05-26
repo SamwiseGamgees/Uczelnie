@@ -4,7 +4,7 @@ import './GlobeScene.css'
 // importy funkcji z Twoich plików
 import { scene, camera, renderer } from '../../kula/sceneSetup';
 import { globe, initGlobe, loadCountries, pointsGroup } from '../../kula/globe';
-import { initTouchEvents } from '../../kula/touchEvents';
+// import { initTouchEvents } from '../../kula/touchEvents';
 import { initInteractions } from '../../kula/interactions';
 import { startAnimationLoop } from '../../kula/animation';
 import { addPoints } from '../../kula/addingPoints';
@@ -20,7 +20,7 @@ const GlobeScene: React.FC<GlobeSceneProps> = ({ className }) => {
     if (!containerRef.current) return;
 
     // inicjalizacja sceny
-    initTouchEvents();
+    // initTouchEvents();
     initGlobe();
     loadCountries();
 

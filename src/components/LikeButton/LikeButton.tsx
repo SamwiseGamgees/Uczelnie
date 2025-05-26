@@ -26,7 +26,7 @@ export default function LikeButton() {
         8.5c0 3.78-3.4 6.86-8.55 
         11.54L12 21.35z" />
       </svg>
-      <span className="like-text">{liked ? 'Ulubione' : 'Polub'}</span>
+      <span className="like-text">{liked ? 'Liked' : 'Like'}</span>
     </button>
   );
 }
