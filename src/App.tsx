@@ -13,6 +13,8 @@ import { useEffect } from "react";
 import { useAuthStore } from "./zustand/useAuthStore"; 
 import NotFound from "./components/NotFound/NotFound";
 import CheckEmail from './components/CheckEmail/CheckEmail';
+import AddUniPlus from "./components/AddUni/AddUniPlus/AddUniPlus";
+import AddUni from "./components/AddUni/AddUni";
 
 function App() {
   const setUsername = useAuthStore((state) => state.setUsername);
@@ -52,6 +54,7 @@ function App() {
               </div>
               <UniDesc />
               <UniFrame />
+              <AddUniPlus />
             </>
           }
         />
@@ -60,6 +63,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/check-email" element={<CheckEmail />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/add-uni" element={<AddUni />} />
       </Routes>
     </BrowserRouter>
   );

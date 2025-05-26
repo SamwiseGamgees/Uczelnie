@@ -13,7 +13,8 @@ type PointGroup = THREE.Group & {
 function addPointOnSphere(
   lat: number,
   lon: number,
-  radius: number = 1
+  radius: number = 1,
+  isNew: boolean
 ): PointGroup {
   const latitude  = THREE.MathUtils.degToRad(lat);
   const longitude = THREE.MathUtils.degToRad(lon);
@@ -26,6 +27,7 @@ function addPointOnSphere(
   const group = new THREE.Group() as PointGroup;
   group.position.set(x, y, z);
   group.userData.isPoint = true;
+  group.userData.isNew = isNew;
 
   // --- główna kropka ---
   const texture   = new THREE.TextureLoader().load("/media/dot.png");

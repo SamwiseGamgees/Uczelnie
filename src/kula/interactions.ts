@@ -24,9 +24,11 @@ function handlePointHover(
   const setHoveredName = useHoverStore.getState().setHoveredName;
   setHoveredName(name, x, y);
 }
-function handlePointClick(name: string | null) {
+function handlePointClick(name: string | null, isNew: boolean) {
   const setClickedName = useHoverStore.getState().setClickedName;
   setClickedName(name);
+  const setIsNew = useHoverStore.getState().setIsNew;
+  setIsNew(isNew);
 }
 let clickRequested = false;
 window.addEventListener("click", () => {
@@ -136,11 +138,12 @@ function initInteractions(
         if (point?.userData?.desc) {
           document.body.style.cursor = "pointer";
           const name = point.userData.desc;
+          const isNew = point.userData.isNew;
           const screenPos = getScreenCoords(point, camera, renderer);
           handlePointHover(name, screenPos.x, screenPos.y);
           globe.userData.autoRotate = false;
           if (clickRequested) {
-            handlePointClick(name);
+            handlePointClick(name, isNew);
             clickRequested = false;
           }
         }
