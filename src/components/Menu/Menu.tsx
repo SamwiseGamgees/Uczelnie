@@ -3,7 +3,6 @@ import './Menu.css';
 import { manageButtonState } from "../../zustand/manageButtonState";
 import { useAuthStore } from "../../zustand/useAuthStore"; 
 import { useState } from "react";
-import ProfileMenu from "../profilemenu/profilemenu";
 import supabase from '../../config/supabaseClient';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,7 +36,6 @@ export default function Menu() {
           <MenuButton onClick={() => navigate('/user-info')}>
             {username.toUpperCase()}
           </MenuButton>
-          {showProfileMenu && <ProfileMenu onLogout={handleLogout} />}
         </div>
       ) : (
         <MenuButton onClick={() => navigate('/login')}>LOG IN</MenuButton>
