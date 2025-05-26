@@ -33,7 +33,7 @@ export default function Title({ text, speed = 250 }: TitleProps) {
       if(i === 1){
         clearInterval(interval);
       }
-    }, 2000/(textLength));
+    }, 1500/(textLength));
     
   }
 }, [buttonsState, text, speed]);

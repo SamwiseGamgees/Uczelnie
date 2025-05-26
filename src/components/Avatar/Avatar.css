@@ -1,0 +1,6 @@
+.avatar-image,
+.avatar-fallback {
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+}

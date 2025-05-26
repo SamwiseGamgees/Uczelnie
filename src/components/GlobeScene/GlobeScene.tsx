@@ -15,28 +15,41 @@ interface GlobeSceneProps {
 
 const GlobeScene: React.FC<GlobeSceneProps> = ({ className }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const initializedRef = useRef(false);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    // ◀︎ jeśli już wykonałeś init, to nie rób go ponownie
+    if (initializedRef.current) {
+      return;
+    }
+    initializedRef.current = true;        // ← oznacz, że init już był
+
+    const container = containerRef.current;
+    if (!container) return;
 
     // inicjalizacja sceny
     // initTouchEvents();
-    initGlobe();
-    loadCountries();
+    const init = async () => {
+      if (!globe.userData.initialized) {
+        initGlobe();
+        await loadCountries();
+        globe.userData.initialized = true;
+      }
 
-    // ładowanie punktów
-    addPoints().then(points => {
+      const points = await addPoints();
 
-      // dodaj globusa do sceny
-      scene.add(globe);
-      globe.position.set(0, 3, 0);
-      // interakcje i animacja
+      if (!scene.children.includes(globe)) {
+        scene.add(globe);
+        globe.position.set(0, 3, 0);
+      }
       initInteractions(camera, globe);
       startAnimationLoop(scene, camera, renderer, globe, points);
 
-      // render
+    if (!containerRef.current!.contains(renderer.domElement)) {
       containerRef.current!.appendChild(renderer.domElement);
-    });
+    }
+  };
+  init();
 
     return () => {
       if (renderer.domElement && containerRef.current?.contains(renderer.domElement)) {

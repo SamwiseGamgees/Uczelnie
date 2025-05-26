@@ -10,8 +10,8 @@
 
 }
 
-.text.hide {
-  animation: hideText 2s forwards !important;
+.text.hideTitle {
+  animation: hideText 1.5s forwards !important;
 }
 
 @keyframes showText{

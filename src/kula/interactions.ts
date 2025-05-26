@@ -181,7 +181,7 @@ function initInteractions(
     });
   }
   manageButtonState.subscribe((state) => {
-    if (state.buttonClicked === "globe" && globe.userData.autoRotate) {
+    if (state.buttonClicked === "globe" && globe.userData.autoRotate && state.prevButtonClicked !== "globe" ) {
       setTimeout(() => {
         isAnimating = true;
         globe.userData.autoRotate = false;

@@ -81,13 +81,17 @@ export default function Login() {
 
                 const { error: signUpError, data } = result;
 
-                if (
-                    signUpError ||
-                    (!data.session && data.user) // <- Supabase nie zwraca error, ale konto już istnieje
-                ) {
-                    setError("Konto z tym adresem e-mail już istnieje.");
+                if (signUpError) {
+                    setError(signUpError.message || "Błąd przy rejestracji.");
                     return;
                 }
+
+                if (data.user && !data.session) {
+                    // Konto utworzone, ale trzeba potwierdzić e-mail
+                    navigate('/check-email');
+                    return;
+                }
+
             
                 if (data.user) {
                     const username = data.user.user_metadata?.username || loginData.username;
