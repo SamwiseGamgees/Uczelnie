@@ -13,10 +13,10 @@ import { useEffect } from "react";
 import { useAuthStore } from "./zustand/useAuthStore";
 import NotFound from "./components/NotFound/NotFound";
 import CheckEmail from "./components/CheckEmail/CheckEmail";
-import AddUniPlus from "./components/AddUni/AddUniPlus/AddUniPlus";
 import AddUni from "./components/AddUni/AddUni";
 import { Outlet } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import UserProfileFrame from "./components/UserProfileInfo/UserProfileFrame";
 
 function Layout() {
   const { pathname } = useLocation();
@@ -24,7 +24,10 @@ function Layout() {
   return (
     <>
       {/* Globę + Menu + Frame + Intro pokazujemy TYLKO na "/" */}
-      <div className={pathname === "/" ? "show" : "hide"} style={{ width: "100vw", height: "100vh" }}>
+      <div
+        className={pathname === "/" ? "show" : "hide"}
+        style={{ width: "100vw", height: "100vh" }}
+      >
         <GlobeScene className="globe" />
         <Menu />
         <Frame />
@@ -36,7 +39,6 @@ function Layout() {
     </>
   );
 }
-
 
 function App() {
   const setUsername = useAuthStore((state) => state.setUsername);
@@ -80,12 +82,21 @@ function App() {
               <>
                 <UniDesc />
                 <UniFrame />
-                <AddUniPlus />
               </>
             }
           />
 
           {/* Pozostałe trasy */}
+          <Route
+            path="user-info"
+            element={
+              <>
+
+                <Frame />
+                <UserProfileFrame />
+              </>
+            }
+          />
           <Route path="forgot-password" element={<ForgotPassword />} />
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="check-email" element={<CheckEmail />} />

@@ -34,13 +34,13 @@ export default function Menu() {
       <MenuButton> | </MenuButton>
       {username ? (
         <div style={{ position: "relative" }}>
-          <MenuButton onClick={() => setShowProfileMenu(prev => !prev)}>
-            {username.toUpperCase()} ⌄
+          <MenuButton onClick={() => navigate('/user-info')}>
+            {username.toUpperCase()}
           </MenuButton>
           {showProfileMenu && <ProfileMenu onLogout={handleLogout} />}
         </div>
       ) : (
-        <MenuButton onClick={() => navigate('/login')}>SIGN IN</MenuButton>
+        <MenuButton onClick={() => navigate('/login')}>LOG IN</MenuButton>
       )}
     </div>
   );
