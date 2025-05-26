@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
 import './LikeButton.css';
+import supabase from '@/config/supabaseClient';
+import { useIsLoggedIn } from '@/config/isLoggedIn';
 
 export default function LikeButton() {
   const [liked, setLiked] = useState(false);
+  const isLoggedIn = useIsLoggedIn();
 
   const toggleLike = () => {
     setLiked((prev) => !prev);
   };
+  const addLike = async () => {
+    const { data, error } = await supabase.auth.getUser()
+    if (error) {
+      console.log
+    }
 
+    // const { data, error } = await supabase
+    //   .from("ulubione")
+  };
+  if(!isLoggedIn) return null;
   return (
     <button
       className={`like-button ${liked ? 'liked' : ''}`}

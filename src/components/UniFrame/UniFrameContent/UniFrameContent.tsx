@@ -29,7 +29,7 @@ export default function UniFrameContent() {
   }, [clickedUni, isNew]);
 
   if (!clickedUni || !uniInfo) {
-    return <div className="uniFrameContent">— wybierz uczelnię —</div>;
+    return <div className="uniFrameContent"></div>;
   }
 
   return (
