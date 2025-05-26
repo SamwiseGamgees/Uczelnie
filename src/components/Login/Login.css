@@ -1,3 +1,4 @@
+
 .container {
   padding-top: 10vh;
   position: absolute;
@@ -7,9 +8,6 @@
   width: 100vw;
   height: 100vh;
   background: black;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
   text-align: center;
 }
 
@@ -21,17 +19,18 @@
 .mini-form {
   max-width: 500px;
   margin: 0 auto;
-  padding: 2rem; /* Zwiększono padding wewnątrz formularza */
+  padding: 2rem; 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Zapewnia lepsze rozmieszczenie elementów */
-  height: auto; /* Ustawienie na auto, aby nie rozjeżdżały się */
+  justify-content: flex-start; 
+  height: auto; 
 }
 
 
 
-.text_l {
+.text_ll {
   color: white;
+  font-size: 5rem;
 }
 
 .header, .inputs, .forgot-password, .submit-container {
@@ -51,40 +50,25 @@
 
 .input {
   margin: 10px 0;
-  display: flex; /* Użyj flexbox, żeby obrazek i input były w jednej linii */
-  align-items: center; /* Wyrównanie obrazu i inputa w pionie */
+  display: flex; 
+  align-items: center; 
 }
 
 .input img {
   width: 24px;
-  height: 24px; /* Możesz dodać wysokość, jeśli chcesz, aby był równy */
-  margin-right: 10px; /* Odstęp między obrazkiem a inputem */
-}
-
-.input input {
-  width: 100%; /* Pełna szerokość w kontenerze */
-  padding: 20px;
-  font-size: 1rem;
-  background: black;
-  color: white;
-  border: none;
-  border-bottom: 2px solid white;
-  box-sizing: border-box; /* Zapewnia, że padding i border będą wliczane do szerokości */
+  height: 24px; 
+  margin-right: 10px;
 }
 
 .input input::placeholder {
-  color: #ccc;
-}
-
-.input input:focus {
-  outline: none; /* nie ma niebieskiego gówna */
+  color: grey;
 }
 
 
 .submit_l {
   width: 100%;
   max-width: 400px;
-  height: 45px; /* Dopasowanie wysokości przycisku */
+  height: 45px; 
   background: white;
   color: black;
   border-radius: 5px;
@@ -92,17 +76,9 @@
   font-size: 1rem;
   border: none;
   box-sizing: border-box;
-  margin-top: 15px; /* Zwiększenie odstępu pomiędzy przyciskiem a innymi elementami */
+  margin-top: 15px; 
 }
 
-.submit_s {
-  display: block;
-  background: white;
-  color: black;
-  border-radius: 5px;
-  cursor: pointer;
-  visibility: hidden;
-}
 
 .google-login-button {
   width: 100%;
@@ -139,3 +115,4 @@
   margin: auto;
   height: 40px;
 }
+

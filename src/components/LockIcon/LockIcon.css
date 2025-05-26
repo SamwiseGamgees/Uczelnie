@@ -1,0 +1,30 @@
+.lock-icon {
+    width: 100px;
+    height: 100px;
+  }
+  
+  /* Obramowanie – animacja po okręgu */
+  .lock-circle {
+    stroke-dasharray: 175;  /* obwód ~ 2πr = 2 * 3.14 * 28 ≈ 175 */
+    stroke-dashoffset: 175;
+    transition: stroke-dashoffset 1s ease;
+  }
+  
+  /* Kłódka schowana i przeskalowana */
+  .lock-body {
+    opacity: 0;
+    transform: scale(0.5);
+    transform-origin: center;
+    transition: opacity 0.4s ease 1s, transform 0.4s ease 1s; /* z opóźnieniem */
+  }
+  
+  /* Po aktywacji animacji */
+  .lock-icon.animate .lock-circle {
+    stroke-dashoffset: 0;
+  }
+  
+  .lock-icon.animate .lock-body {
+    opacity: 1;
+    transform: scale(1);
+  }
+  

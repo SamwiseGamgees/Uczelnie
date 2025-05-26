@@ -1,0 +1,62 @@
+.check-email-page {
+    background-color: black;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .check-email-container {
+    max-width: 480px;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .lock-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 24px;
+  }
+  
+  .check-email-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+  
+  .check-email-container p {
+    font-size: 1rem;
+    color: #cccccc;
+    margin-bottom: 24px;
+  }
+  
+  .check-email-button {
+    background-color: #e50914;
+    color: white;
+    padding: 14px 28px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  .check-email-button:hover {
+    background-color: #c20812;
+  }
+  
+  .check-email-help {
+    font-size: 0.9rem;
+    color: #999;
+  }
+  
+  .check-email-help a {
+    color: #e50914;
+    text-decoration: none;
+  }
+  

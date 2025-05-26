@@ -151,3 +151,10 @@
   /* skaluj 1.25× względem środka */
   transform: scale(1.25);
 }
+
+.uniFrameLike {
+  position: absolute;
+  top: 21.5%;
+  left: 20%;
+  z-index: 10;
+}

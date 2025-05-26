@@ -9,8 +9,34 @@ import supabase from "./config/supabaseClient";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ResetPassword from "./components/ResetPassword/ResetPassword"; // ← dodaje tę stronę
 import ForgotPassword from './components/ResetPassword/ForgotPassword';
+import { useEffect } from "react"; 
+import { useAuthStore } from "./zustand/useAuthStore"; 
+import NotFound from "./components/NotFound/NotFound";
+import CheckEmail from './components/CheckEmail/CheckEmail';
 
 function App() {
+  const setUsername = useAuthStore((state) => state.setUsername);
+
+  useEffect(() => {
+    const checkIfUserIsLoggedIn = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession();
+
+      if (error) {
+        console.error("Błąd pobierania sesji:", error.message);
+        return;
+      }
+
+      if (session?.user) {
+        const metadata = session.user.user_metadata;
+        const username = metadata?.username || metadata?.full_name || "Użytkownik";
+        setUsername(username);
+        console.log("Zalogowany jako:", username);
+      }
+    };
+
+    checkIfUserIsLoggedIn();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +49,6 @@ function App() {
                 <Menu />
                 <Frame />
                 <Intro />
-                <Login />
               </div>
               <UniDesc />
               <UniFrame />
@@ -32,6 +57,9 @@ function App() {
         />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/check-email" element={<CheckEmail />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

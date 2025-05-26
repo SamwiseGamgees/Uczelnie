@@ -8,6 +8,7 @@ import googleIcon from '../../media/google.png';
 import supabase from "../../config/supabaseClient";
 import { useAuthStore } from '../../zustand/useAuthStore';
 import { useNavigate } from 'react-router-dom';
+import StopButton from '../StopButton/StopButton';
 
 
 interface LoginData {
@@ -17,8 +18,6 @@ interface LoginData {
 }
 
 export default function Login() {
-    const buttonClicked = manageButtonState(state => state.buttonClicked);
-    const isVisible = buttonClicked === 'login';
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState<LoginData>({
         username: '',
@@ -35,7 +34,7 @@ export default function Login() {
         setLoginData(prev => ({
             ...prev,
             [name]: value
-        }));
+        }));``
     };
 
     const handleGoogleLogin = async () => {
@@ -43,6 +42,9 @@ export default function Login() {
         
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
+            options: {
+                redirectTo: window.location.origin  // lub `${window.location.origin}/login`
+            }
         });
 
         if (error) {
@@ -77,20 +79,20 @@ export default function Login() {
                     }
                 });
 
-                if (result.error) {
-                    const msg = result.error.message;
-                
-                    if (result.error.status === 400 || msg.includes("User already registered")) {
-                        setError("Konto z tym adresem już istnieje.");
-                    } else {
-                        setError("Wystąpił błąd: " + msg);
-                    }
-                
-                } else if (result.data?.user) {
-                    // Konto zostało utworzone lub użytkownik już istniał, ale nie było błędu
-                    const username = result.data.user.user_metadata?.username || loginData.username;
+                const { error: signUpError, data } = result;
+
+                if (
+                    signUpError ||
+                    (!data.session && data.user) // <- Supabase nie zwraca error, ale konto już istnieje
+                ) {
+                    setError("Konto z tym adresem e-mail już istnieje.");
+                    return;
+                }
+            
+                if (data.user) {
+                    const username = data.user.user_metadata?.username || loginData.username;
                     setUsername(username);
-                    console.log("Zarejestrowano (lub aktywowano) użytkownika:", result);
+                    console.log("Zarejestrowano użytkownika:", result);
                 } else {
                     setError("Wystąpił nieoczekiwany błąd.");
                 }
@@ -124,6 +126,7 @@ export default function Login() {
             } else {
                 const username = result.data?.user?.user_metadata?.username || loginData.username;
                 setUsername(username);
+                navigate('/');
                 console.log(isSignIn ? 'Zarejestrowano użytkownika' : 'Zalogowano użytkownika', result);
             }
 
@@ -141,10 +144,11 @@ export default function Login() {
     };
 
     return (
-        <div className={`container ${isVisible ? 'active' : ''}`}>
+        <div className={`container`}>
             <div className="mini-form">
+            <StopButton />
                 <div className="header">
-                    <div className="text_l">{isSignIn ? 'Sign Up' : 'Log in'}</div>
+                    <div className="text_ll">{isSignIn ? 'Sign Up' : 'Log in'}</div>
                 </div>
 
                 <form onSubmit={handleSubmit}>

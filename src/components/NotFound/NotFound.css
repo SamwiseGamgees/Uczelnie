@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@700&display=swap');
+.notfound-container {
+    font-family: 'Oxanium', cursive, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60vw; /* dynamiczne dopasowanie do szerokości */
+    font-weight: bold;
+    color: #434343;
+    background-color: #000;
+    user-select: none;
+    text-align: center;
+    box-sizing: border-box; /* ważne, żeby padding/margin nie rozszerzały elementu */
+    overflow: hidden; /* zapobiega wyjeżdżaniu tekstu */
+  }
+  

@@ -3,6 +3,7 @@ import UniFrameContent from "./UniFrameContent/UniFrameContent";
 import UniFrameImage from "./UniFrameImg";
 import { useHoverStore } from "../../zustand/useHoverStore";
 import xImg from "../../media/x.png";
+import LikeButton from '../LikeButton/LikeButton';
 
 export default function UniFrame() {
   const uniClicked = useHoverStore((state) => state.clickedName);
@@ -21,6 +22,9 @@ export default function UniFrame() {
           <foreignObject x="0" y="0" width="1536" height="1024">
             <div className="uniFrameContentBox">
               <UniFrameContent />
+            </div>
+            <div className="uniFrameLike">
+                <LikeButton />
             </div>
             <button
               className="uniFrameClose"
