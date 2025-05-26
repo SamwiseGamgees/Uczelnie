@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./AddUniForm.css";
+import { useNavigate } from 'react-router-dom';
+
 
 export interface UniData {
   uczelnia: string;
@@ -14,6 +16,7 @@ interface Props {
 }
 
 export default function AddUniForm({ onSubmit }: Props) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<UniData>({
     uczelnia: "",
     kraj: "",
@@ -29,9 +32,16 @@ export default function AddUniForm({ onSubmit }: Props) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+  
+    try {
+      await onSubmit(formData); // jeśli onSubmit się powiedzie
+      navigate('/'); // dopiero wtedy przekieruj
+    } catch (error) {
+      console.error("Błąd podczas dodawania uczelni:", error);
+      // możesz też dodać np. komunikat o błędzie
+    }
   };
 
   return (
@@ -101,8 +111,16 @@ export default function AddUniForm({ onSubmit }: Props) {
         </div>
 
         <button type="submit" className="submit-button">
-          Dodaj uczelnię
+        Dodaj uczelnię
+      </button>
+      <button
+              type="button"
+              className="cancel-button"
+              onClick={() => navigate('/')}
+            >
+              Anuluj
         </button>
+
       </form>
     </div>
   );

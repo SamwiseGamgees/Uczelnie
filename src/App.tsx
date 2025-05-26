@@ -18,6 +18,7 @@ import AddUni from "./components/AddUni/AddUni";
 
 function App() {
   const setUsername = useAuthStore((state) => state.setUsername);
+  const setAvatarUrl = useAuthStore(state => state.setAvatarUrl);
 
   useEffect(() => {
     const checkIfUserIsLoggedIn = async () => {
@@ -31,8 +32,10 @@ function App() {
       if (session?.user) {
         const metadata = session.user.user_metadata;
         const username = metadata?.username || metadata?.full_name || "Użytkownik";
+        const avatar = metadata?.avatar_url || metadata?.picture || null;
         setUsername(username);
-        console.log("Zalogowany jako:", username);
+        setAvatarUrl(avatar);
+        console.log("Zalogowany jako:", username, "Avatar URL:", avatar);
       }
     };
 
