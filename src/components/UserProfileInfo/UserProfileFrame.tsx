@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 import LikeImage from "./LikeImage";
 import AddImage from "./AddImage";
 
-export default function UserProfileFrame(): JSX.Element | null {
+import React from "react";
+
+export default function UserProfileFrame(): React.JSX.Element | null {
   const isLoggedIn = useIsLoggedIn();
   const username = useAuthStore((s) => s.username);
   const avatarUrl = useAuthStore((s) => s.avatarUrl);

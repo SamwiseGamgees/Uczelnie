@@ -1,6 +1,11 @@
+import { useNavigate } from "react-router-dom";
 export default function LikeImage() {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/favourites");
+  };
   return (
-    <button className="likedUniButton">
+    <button className="likedUniButton" onClick={handleClick}>
       <svg
         className="likeImg"
         viewBox="0 0 24 24"

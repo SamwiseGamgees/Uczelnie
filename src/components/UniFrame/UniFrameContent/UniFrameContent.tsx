@@ -23,7 +23,7 @@ export default function UniFrameContent() {
       return;
     }
     (async () => {
-      const info = await getUniversityInfo(clickedUni, isNew);
+      const info = await getUniversityInfo(clickedUni, isNew ?? false);
       setUniInfo(info);
     })();
   }, [clickedUni, isNew]);

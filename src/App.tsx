@@ -17,6 +17,7 @@ import AddUni from "./components/AddUni/AddUni";
 import { Outlet } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import UserProfileFrame from "./components/UserProfileInfo/UserProfileFrame";
+import FavouriteUnis from "./components/FavouriteUnis/FavouriteUnis";
 
 function Layout() {
   const { pathname } = useLocation();
@@ -102,6 +103,7 @@ function App() {
           <Route path="check-email" element={<CheckEmail />} />
           <Route path="login" element={<Login />} />
           <Route path="add-uni" element={<AddUni />} />
+          <Route path="favourites" element={<FavouriteUnis />} />
 
           {/* „Catch-all” dla nieznanych ścieżek – możesz przenieść na "/", albo na 404 */}
           <Route path="*" element={<Navigate to="/" replace />} />
