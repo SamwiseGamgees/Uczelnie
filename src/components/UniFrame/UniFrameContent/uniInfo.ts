@@ -49,7 +49,7 @@ export async function getUniversityInfo(
 
     return {
       kind: "existing",
-      description: (descData.opisy as { description: string }).description,
+      description: (descData.opisy as { description: string }[])?.description,
       WorldRank: statData.WorldRank,
       NationalRank: statData.NationalRank,
       Score: statData.Score,
