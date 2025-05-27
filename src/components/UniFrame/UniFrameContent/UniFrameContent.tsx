@@ -63,6 +63,10 @@ function NewUniInfoDisplay({
           <h3>Data dodania:</h3>
           <h1>{formatYMD(info.created_at)}</h1>
         </div>
+        <div>
+          <h3>Autor:</h3>
+          <h1>{info.Author}</h1>
+        </div>
       </div>
       <div className="descriptionBox">
         <p>{info.description}</p>

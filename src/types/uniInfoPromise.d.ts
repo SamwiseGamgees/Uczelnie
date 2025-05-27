@@ -14,6 +14,7 @@ export interface NewUniversityInfo {
   description: Array | null;
   Country: string;
   created_at: string;          // or Date, depending on your DB type
+  Author: string;
 }
 
 export type UniversityInfo = ExistingUniversityInfo | NewUniversityInfo;

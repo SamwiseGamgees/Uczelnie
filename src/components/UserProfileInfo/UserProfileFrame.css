@@ -21,6 +21,14 @@
   transform: scale(5);
   top: 150px;
 }
+.profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  object-fit: cover;
+}
 
 .userName {
   color: white;
@@ -31,7 +39,7 @@
   line-height: 1.1;
   position: fixed;
   left: 50%;
-  top: 250px;
+  top:  290px;
   transform: translate(-50%);
 }
 
@@ -86,15 +94,13 @@
   fill: transparent;
   stroke: #ffffff;
   stroke-width: 1;
-  transition: fill 1s ease,
-              stroke 1s ease,
-              transform 1s ease;
+  transition: fill 1s ease, stroke 1s ease, transform 1s ease;
 }
 
 /* Size overrides */
 .likeImg {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   padding: 15px 0;
 }
 
@@ -108,7 +114,6 @@
 .addImg:hover {
   stroke-width: 2;
 }
-
 
 .userOptions {
   width: 50%;

@@ -12,7 +12,7 @@ export async function getUniversityInfo(
   if (isNew) {
     const { data, error } = await supabase
       .from("nowe_uczelnie")
-      .select("created_at, Country, Description")
+      .select("created_at, Country, Description, Author")
       .eq("University", uniName)
       .single();
 
@@ -26,6 +26,7 @@ export async function getUniversityInfo(
       description: data.Description,
       Country: data.Country,
       created_at: data.created_at,
+      Author: data.Author
     };
   } else {
     // fetch description and stats in parallel

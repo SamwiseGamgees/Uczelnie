@@ -1,7 +1,9 @@
 import supabase from "config/supabaseClient";
 import AddUniForm, { UniData } from "./AddUniForm/AddUniForm";
+import { useAuthStore } from "@/zustand/useAuthStore";
 
 export default function AddUni() {
+  const username = useAuthStore().username;
   const handleAddUniversity = async (data: UniData) => {
     const { data: uni, error: err1 } = await supabase
       .from("nowe_uczelnie")
@@ -12,6 +14,7 @@ export default function AddUni() {
           Latitude: data.szerokosc,
           Longitude: data.dlugosc,
           Description: data.opis,
+          Author: username,
         },
       ]);
     
