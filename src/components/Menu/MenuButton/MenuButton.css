@@ -6,7 +6,7 @@
   color: white;
   border: 0;
   font-family: "Space Grotesk", sans-serif;
-  font-optical-sizing: auto;
+  /* font-optical-sizing: auto; */
 }
 
 .menuButton:hover{
