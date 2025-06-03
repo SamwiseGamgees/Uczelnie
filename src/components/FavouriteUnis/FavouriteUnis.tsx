@@ -41,29 +41,22 @@ export default function FavouriteUnis() {
     return <p>Brak ulubionych uczelni.</p>;
 
   return (
-    <table className="styled-table">
-      <thead>
-        <tr>
-          <th>Uczelnia</th>
-          <th>Dodano</th>
-        </tr>
-      </thead>
-      <tbody>
-        {favourites.map((f, i) => (
-          <tr key={i}>
-            <td>{f.uni_name}</td>
-            <td>
-              {new Date(f.created_at).toLocaleString("pl-PL", {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className="fav-grid">
+      {favourites.map((f, i) => (
+        <div key={i} className="fav-card">
+          <div className="fav-name">{f.uni_name}</div>
+          <div className="fav-date">
+            {new Date(f.created_at).toLocaleString("pl-PL", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
   );
+  
 }
