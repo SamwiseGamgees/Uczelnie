@@ -98,15 +98,10 @@
 }
 
 /* Size overrides */
-.likeImg {
+.likeImg, .addImg {
   width: 150px;
   height: 150px;
   padding: 15px 0;
-}
-
-.addImg {
-  width: 150px;
-  height: 150px;
 }
 
 /* Hover state */
