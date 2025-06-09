@@ -6,6 +6,7 @@ import supabase from "@/config/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import LikeImage from "./LikeImage";
 import AddImage from "./AddImage";
+import StopButton from "../StopButton/StopButton"
 
 import React from "react";
 
@@ -44,6 +45,7 @@ export default function UserProfileFrame(): React.JSX.Element | null {
           preserveAspectRatio="xMidYMid meet"
         >
           <foreignObject width="1024" height="1024">
+            <StopButton />
             <div className="profilePicture">
               {avatarUrl && (
                 <img src={avatarUrl} alt="avatar" className="profile-avatar" />

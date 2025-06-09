@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import supabase from "@/config/supabaseClient";
 import { useUser } from "@supabase/auth-helpers-react"; // przykładowy hook auth
 import './FauriteUnis.css';
+import StopButton from "../StopButton/StopButton"
 
 export default function FavouriteUnis() {
   const user = useUser();                   // <-- HOOK w górnej części komponentu
@@ -42,6 +43,7 @@ export default function FavouriteUnis() {
 
   return (
     <div className="fav-grid">
+      <StopButton />
       {favourites.map((f, i) => (
         <div key={i} className="fav-card">
           <div className="fav-name">{f.uni_name}</div>

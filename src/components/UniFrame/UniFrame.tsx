@@ -5,7 +5,7 @@ import { useHoverStore } from "../../zustand/useHoverStore";
 import xImg from "/media/x.png";
 import { useState } from "react";
 import { useEffect } from "react";
-import LikeButton from '../LikeButton/LikeButton';
+import LikeButton from './LikeButton/LikeButton';
 
 export default function UniFrame() {
   const uniClicked = useHoverStore((state) => state.clickedName);
